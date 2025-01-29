@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thisal Chamodya</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #ddd;
+      line-height: 1.6;
+      background: #121212; /* Dark background */
+    }
+
+    a {
+      text-decoration: none;
+      color: #ddd; /* Light grey links */
+    }
+
+    h1, h2, h3 {
+      color: #f1f1f1; /* Off-white text */
+    }
+
+    /* Scroll Progress Bar */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 5px;
+      background-color: #00d4ff;
+      z-index: 9999;
+      transition: width 0.25s ease-out;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes scaleUp {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Header */
+    header {
+      background: #1f1f1f; /* Dark header */
+      color: #f1f1f1;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: fadeIn 1s ease-in-out;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    }
+
+    header nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    header nav ul li {
+      margin: 0 15px;
+    }
+
+    header nav ul li a {
+      color: #ddd; /* Light grey links */
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    header nav ul li a:hover {
+      color: #00d4ff; /* Highlighted link */
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: url('https://source.unsplash.com/1600x900/?nature,technology') no-repeat center center/cover;
+      color: #fff;
+      animation: fadeIn 1.5s ease-in-out;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .hero h1, .hero p, .cta {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      animation: slideIn 1s ease-in-out;
+    }
+
+    .hero p {
+      margin: 15px 0;
+      font-size: 1.4rem;
+      animation: slideIn 1.2s ease-in-out;
+    }
+
+    .cta {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 25px;
+      background: #00d4ff;
+      color: #222;
+      border-radius: 30px;
+      font-weight: bold;
+      animation: scaleUp 1.3s ease-in-out;
+      transition: background 0.3s, transform 0.3s;
+      border: 1px solid black;
+    }
+    .cta:hover {
+      background: #000000;
+      color: white;
+      border: 1px solid white;
+      transition: 0.5s;
+    }
+
+    @keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.hero {
+  background: linear-gradient(45deg, #333333, #555555, #1f1f1f);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+  color: white; /* Text color to stand out on the dark background */
+}
+
+
+    
+    /* About Section */
+    #about {
+      padding: 60px 20px;
+      background: #1e1e1e;
+      text-align: center;
+    }
+
+    #about p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    /* Projects Section */
+#projects {
+  padding: 60px 20px;
+  background: #2d2d2d; /* Dark grey background */
+  text-align: center;
+}
+
+.projects-grid {
+  display: flex; /* Changed from grid to flex for horizontal scrolling */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 10px; /* To prevent content from being hidden */
+}
+
+.project-card {
+  min-width: 300px; /* Ensure each project card has a minimum width */
+  border: 1px solid #444;
+  padding: 20px;
+  border-radius: 12px;
+  background: #1f1f1f;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+
+
+.project-card h3 {
+  margin-top: 0;
+}
+
+.projects-grid::-webkit-scrollbar {
+  height: 8px; /* Horizontal scrollbar height */
+}
+
+.projects-grid::-webkit-scrollbar-thumb {
+  background: #00d4ff; /* Color of the scrollbar */
+  border-radius: 4px;
+}
+
+
+    /* Skills Section */
+    #skills {
+      padding: 60px 20px;
+      background: #121212; /* Black background */
+      text-align: center;
+    }
+
+    .skills-list {
+        margin-top: 50px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .skill {
+      background: #00d4ff;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      animation: scaleUp 1.5s ease-in-out;
+    }
+
+    /* Contact Section */
+    #contact {
+      padding: 60px 20px;
+      background: #2d2d2d; /* Dark grey background */
+      text-align: center;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    form label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    form input, form textarea, form button {
+      margin-bottom: 20px;
+      padding: 12px;
+      font-size: 1rem;
+      border: 1px solid #444;
+      border-radius: 8px;
+      font-family: 'Roboto', sans-serif;
+      background: #222;
+      color: #ddd;
+    }
+
+    form button {
+      background: #00d4ff;
+      color: #222;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    form button:hover {
+      background: #00b3cc;
+      transform: translateY(-3px);
+    }
+
+    /* Footer */
+    footer {
+      background: #121212;
+      color: #f1f1f1;
+      padding: 20px 0;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #00d4ff;
+      margin: 0 10px;
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: #00b3cc;
+    }
+
+    .download-resume {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: #28a745;
+  color: #fff;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  z-index: 1000;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px;
+}
+
+.download-resume::before {
+  content: '\2193'; /* Unicode for down arrow */
+  font-size: 1.5rem;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.download-resume:hover {
+  width: 200px; /* Expand the button */
+  border-radius: 30px;
+  background: #218838;
+}
+
+.download-resume:hover::before {
+  content: "Download My Resume"; /* Change to text */
+  font-size: 1rem;
+}
+
+/* Section Titles */
+h2 {
+  font-size: 2.5rem; /* Increase the font size */
+  margin-bottom: 20px;
+  color: #00d4ff; /* Optional: color for the titles */
+}
+.projects-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 200px;
+}
+
+.scroll-btn {
+    background: #00d4ff;
+    color: #222;
+    border: none;
+    font-size: 2rem;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s, transform 0.3s;
+    position: relative;
+    bottom: 20px; /* Adjust this value to move the buttons higher */
+}
+
+
+.scroll-btn:hover {
+    background: #00b3cc;
+    
+}
+
+
+.projects-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 20px;
+    max-width: 1075px;
+    padding-bottom: 50px;
+}
+
+.project-card {
+    min-width: 300px;
+    border: 1px solid #444;
+    padding: 20px;
+    border-radius: 12px;
+    background: #1f1f1f;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.projects-grid::-webkit-scrollbar {
+  display: none;
+}
+/* Scroll to Top Button */
+#scroll-to-top {
+  
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: #000000;
+  color: #fff;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px;
+
+  position: fixed;
+  bottom: 80px;
+  left: 20px;
+  padding: 12px 18px;
+  font-size: 1.5rem;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, transform 0.3s;
+  z-index: 1000;
+  border: 1px solid white;
+}
+
+#scroll-to-top:hover {
+  background: #ffffff;
+  color: #000000;
+  transform: scale(1.1);
+}
+
+#scroll-to-top.show {
+  opacity: 1;
+}
+@keyframes fadeInImage {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+img {
+  animation: fadeInImage 1.2s ease-out;
+}
+
+@media (max-width: 768px) {
+    .project-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 80%;
+    }
+  }
+
+
+  </style>
+</head>
+<body>
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Header -->
+  <header>
+    <h1>My Portfolio</h1>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#image-slider">Moments</a></li>
+        <li><a href="#contact">Contact</a></li>
+        
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <h1>Hi, I'm Thisal Chamodya</h1>
+    <p>A Passionate Full Stack Developer</p>
+    <a href="#projects" class="cta">View My Work</a>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Me</h2>
+    <div style="display: flex; justify-content: center; align-items: center; gap: 30px; padding: 40px;">
+        <!-- Profile Image -->
+        <div style="flex: 1;">
+            <img src="my.jpg" alt="Your Photo" style="border-radius: 50%; width: 250px; height: 250px; object-fit: cover; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease;">
+        </div>
+        <!-- About Text -->
+        <div style="flex: 2; max-width: 700px; text-align: left; font-size: 1.1rem; line-height: 1.8; color: #f1f1f1; background: rgba(0, 0, 0, 0.6); padding: 20px 30px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);">
+            <h3 style="font-size: 2rem; color: #00d4ff; font-weight: 600; margin-bottom: 20px;">Hello! I'm Thisal Chamodya</h3>
+            <p>
+                I'm a passionate full-stack developer with expertise in creating intuitive and dynamic web applications. 
+                I specialize in both front-end and back-end development, always keeping an eye on delivering seamless user experiences.
+                Whether it's building efficient systems or designing elegant user interfaces, I love to work on projects that challenge me to learn and grow.
+            </p>
+            <p>
+                I also enjoy collaborating with creative teams and helping businesses turn their ideas into reality through innovative technology.
+                Let's create something amazing together!
+            </p>
+        </div>
+    </div>
+</section>
+
+
+
+ <!-- Projects Section -->
+<section id="projects">
+  <h2>My Projects</h2>
+  <div class="projects-container">
+      <button id="scroll-left" class="scroll-btn">◀</button>
+      <div class="projects-grid">
+          <div class="project-card">
+              <h3>Project 1</h3>
+              <p>A brief description of the project.</p>
+              <a href="#" target="_blank">View Project</a>
+          </div>
+          <div class="project-card">
+              <h3>Project 2</h3>
+              <p>A brief description of the project.</p>
+              <a href="#" target="_blank">View Project</a>
+          </div>
+          <div class="project-card">
+              <h3>Project 3</h3>
+              <p>A brief description of the project.</p>
+              <a href="#" target="_blank">View Project</a>
+          </div>
+          <div class="project-card">
+              <h3>Project 4</h3>
+              <p>A brief description of the project.</p>
+              <a href="#" target="_blank">View Project</a>
+          </div>
+          <div class="project-card">
+              <h3>Project 5</h3>
+              <p>A brief description of the project.</p>
+              <a href="#" target="_blank">View Project</a>
+          </div>
+          <div class="project-card">
+              <h3>Project 6</h3>
+              <p>A brief description of the project.</p>
+              <a href="#" target="_blank">View Project</a>
+          </div>
+      </div>
+      <button id="scroll-right" class="scroll-btn">▶</button>
+  </div>
+</section>
+
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <h2>My Skills</h2>
+    <div class="skills-list">
+      <span class="skill">Java</span>
+      <span class="skill">HTML</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">React</span>
+      <span class="skill">MongoDB</span>
+      <span class="skill">Springboot</span>
+      <span class="skill">Php</span>
+      
+    </div>
+  </section>
+
+<section id="image-slider" class="slider-container">
+    <h2>Moments</h2>
+    <div class="slider-wrapper">
+        <div class="slide active"><img src="image1.jpg" alt="Slide 1"></div>
+        <div class="slide"><img src="image2.jpg" alt="Slide 2"></div>
+        <div class="slide"><img src="image3.jpg" alt="Slide 3"></div>
+    </div>
+    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="next" onclick="moveSlide(1)">&#10095;</button>
+</section>
+
+<style>
+  #image-slider {
+      padding: 60px 20px;
+      background: #2d2d2d;
+      text-align: center;
+    }
+    .slider-container {
+
+        position: relative;
+        margin: auto;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding-bottom: 30px;
+    }
+
+    .slider-container h2{
+      margin-bottom: 50px;
+    }
+    .slider-wrapper {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+    .slide {
+        min-width: 100%;
+        transition: opacity 0.5s;
+    }
+    .slide img {
+        width: 60%;
+        border-radius: 10px;
+    }
+    .prev, .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .prev { left: 10px; }
+    .next { right: 10px; }
+</style>
+
+<script>
+    let currentIndex = 0;
+    const slides = document.querySelectorAll(".slide");
+
+    function showSlide(index) {
+        if (index >= slides.length) { currentIndex = 0; }
+        else if (index < 0) { currentIndex = slides.length - 1; }
+        else { currentIndex = index; }
+        
+        slides.forEach((slide, i) => {
+            slide.style.display = i === currentIndex ? "block" : "none";
+        });
+    }
+    
+    function moveSlide(n) {
+        showSlide(currentIndex + n);
+    }
+    
+    function autoSlide() {
+        moveSlide(1);
+        setTimeout(autoSlide, 3000);
+    }
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        showSlide(currentIndex);
+        setTimeout(autoSlide, 3000);
+    });
+</script>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form action="mailto:thisalchamodya123@gmail.com" method="POST" enctype="text/plain">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+  
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+  
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+  
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+  
+
+  <!-- Footer -->
+  <footer>
+    <p>Connect with me on 
+      <a href="https://www.linkedin.com/in/thisal-liyanaarachchi?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">LinkedIn</a>, 
+      <a href="https://github.com/Thisal0714">GitHub</a>, or 
+      <a href="#">Twitter</a>.</p>
+  </footer>
+
+  <script>
+    // Scroll Progress Bar
+    const progressBar = document.getElementById('scroll-progress');
+
+    window.addEventListener('scroll', () => {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight; // Total scrollable height
+      const scrollPosition = window.scrollY; // Current scroll position
+      const scrollPercent = (scrollPosition / scrollHeight) * 100;
+      progressBar.style.width = scrollPercent + '%';
+    });
+    document.querySelectorAll('nav ul li a').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+});
+
+  </script>
+  <script>
+    const projectsGrid = document.querySelector(".projects-grid");
+    const scrollLeft = document.getElementById("scroll-left");
+    const scrollRight = document.getElementById("scroll-right");
+
+    scrollLeft.addEventListener("click", () => {
+        projectsGrid.scrollBy({ left: -300, behavior: "smooth" });
+    });
+
+    scrollRight.addEventListener("click", () => {
+        projectsGrid.scrollBy({ left: 300, behavior: "smooth" });
+    });
+</script>
+
+
+  <!-- Download Resume Button -->
+  <a class="download-resume" href='resume.pdf' download="Thisal_Chamodya_CV">
+    <i class="fas fa-arrow-down"></i>
+  </a>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <!-- Scroll to Top Button -->
+<button id="scroll-to-top" class="scroll-btn">↑</button>
+<script> scrollToTopButton = document.getElementById('scroll-to-top');
+
+window.addEventListener('scroll', () => {
+  // Show or hide the button depending on scroll position
+  if (window.scrollY > 200) {
+    scrollToTopButton.classList.add('show');
+  } else {
+    scrollToTopButton.classList.remove('show');
+  }
+});
+
+// Scroll to top when clicked
+scrollToTopButton.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+</script>
+
+</body>
+</html>
